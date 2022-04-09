@@ -13,6 +13,9 @@ const tokenInputElement = document.getElementById("token");
 const headerInputElement = document.getElementById("header");
 const payloadInputElement = document.getElementById("payload");
 const signatureInputElement = document.getElementById("signature");
+const validIconElement = document.getElementById("valid-icon");
+const invalidIconElement = document.getElementById("invalid-icon");
+const validityTextElement = document.getElementById("signature-validity");
 
 const NO_OPERATIONS = [
   "ArrowLeft",
@@ -30,7 +33,7 @@ const RESTORE_CURSOR = ["Backspace"];
 let NO_OPERATIONS_FLAG = false;
 
 tokenInputElement.addEventListener("keydown", (e) => {
-  if (e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) {
+  if ((e.ctrlKey || e.metaKey) && ["a", "c", "x", "z", "y"].includes(e.key.toLowerCase())) {
     NO_OPERATIONS_FLAG = true;
   } else {
     NO_OPERATIONS_FLAG = false;
@@ -38,7 +41,6 @@ tokenInputElement.addEventListener("keydown", (e) => {
 });
 
 tokenInputElement.addEventListener("keyup", (e) => {
-  console.log(e.key);
   if (NO_OPERATIONS.includes(e.key) || NO_OPERATIONS_FLAG) {
     return;
   }
@@ -52,5 +54,11 @@ tokenInputElement.addEventListener("keyup", (e) => {
   }
   setHeader(headerPart, headerInputElement);
   setPayload(payloadPart, payloadInputElement);
-  verifyTokenSignature(tokenInputElement.textContent);
+  verifyTokenSignature(
+    tokenInputElement.textContent,
+    "your-256-bit-secret",
+    validIconElement,
+    invalidIconElement,
+    validityTextElement
+  );
 });

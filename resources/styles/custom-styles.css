@@ -67,6 +67,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding-block: 1rem;
 }
 
 .content-container > textarea::-webkit-scrollbar {
@@ -117,4 +118,38 @@
 
 #signature {
   color: #00b9f1;
+}
+
+.signature-validity-container {
+  display: flex;
+  align-items: center;
+  font-size: 1.7rem;
+}
+
+.signature-validity-container.valid {
+  display: flex;
+  align-items: center;
+  color: #00b9f1;
+}
+
+.signature-validity-container.invalid {
+  display: flex;
+  align-items: center;
+  color: #fb015b;
+}
+
+.invisible {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+
+.validity-icon {
+  width: 1.75rem;
+}
+
+#signature-validity {
+  padding-left: 0.75rem;
 }

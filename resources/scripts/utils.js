@@ -142,7 +142,24 @@ function setToken(token, tokenElement) {
 }
 
 //Verify Token Validity
-function verifyTokenSignature(token, validityElement) {}
+function verifyTokenSignature(token, key, validIconElement, invalidIconElement, validityElement) {
+  const isValid = KJUR.jws.JWS.verify(token, key);
+  if (isValid) {
+    validIconElement.classList.add("visible");
+    validIconElement.classList.remove("invisible");
+    invalidIconElement.classList.add("invisible");
+    invalidIconElement.classList.remove("visible");
+    validityElement.textContent = "Signature Verified";
+    validityElement.style.color = "#00b9f1";
+  } else {
+    validIconElement.classList.add("invisible");
+    validIconElement.classList.remove("visible");
+    invalidIconElement.classList.add("visible");
+    invalidIconElement.classList.remove("invisible");
+    validityElement.textContent = "Invalid Signature";
+    validityElement.style.color = "#fb015b";
+  }
+}
 
 /*-----------------Token Related Functions------------------*/
 
